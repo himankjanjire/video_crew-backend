@@ -1,7 +1,12 @@
-// models/ContactInquiry.js
-const mongoose = require("mongoose");
+import mongoose, { Document, Schema } from 'mongoose';
+import { ContactData } from '../types';
 
-const ContactInquirySchema = new mongoose.Schema({
+export interface IContactInquiry extends ContactData, Document {
+  created_at: Date;
+  updated_at: Date;
+}
+
+const ContactInquirySchema: Schema = new Schema({
   name: { type: String, required: true },
   email: { type: String, required: true },
   company: String,
@@ -24,4 +29,4 @@ const ContactInquirySchema = new mongoose.Schema({
   updated_at: { type: Date, default: Date.now }
 });
 
-module.exports = mongoose.model("ContactInquiry", ContactInquirySchema);
+export default mongoose.model<IContactInquiry>('ContactInquiry', ContactInquirySchema);

@@ -1,4 +1,5 @@
-const nodemailer = require("nodemailer");
+import nodemailer from 'nodemailer';
+import { ContactData } from '../types';
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -8,7 +9,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-const sendContactEmails = async (contactData) => {
+export const sendContactEmails = async (contactData: ContactData): Promise<void> => {
   const { name, email, description, phone } = contactData;
 
   // Email to admin
@@ -62,5 +63,3 @@ const sendContactEmails = async (contactData) => {
     }),
   ]);
 };
-
-module.exports = { sendContactEmails };

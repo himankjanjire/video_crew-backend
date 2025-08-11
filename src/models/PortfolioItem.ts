@@ -1,6 +1,12 @@
-// models/PortfolioItem.js
-const mongoose = require("mongoose");
-const PortfolioItemSchema = new mongoose.Schema({
+import mongoose, { Document, Schema } from 'mongoose';
+import { PortfolioItemData } from '../types';
+
+export interface IPortfolioItem extends PortfolioItemData, Document {
+  created_at: Date;
+  updated_at: Date;
+}
+
+const PortfolioItemSchema: Schema = new Schema({
   title: { type: String, required: true },
   category: { type: String, required: true },
   client: String,
@@ -12,4 +18,5 @@ const PortfolioItemSchema = new mongoose.Schema({
   created_at: { type: Date, default: Date.now },
   updated_at: { type: Date, default: Date.now },
 });
-module.exports = mongoose.model("PortfolioItem", PortfolioItemSchema);
+
+export default mongoose.model<IPortfolioItem>('PortfolioItem', PortfolioItemSchema);

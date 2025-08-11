@@ -1,12 +1,13 @@
-const express = require("express");
-const { verifyToken } = require("../middlewares/auth");
-const {
+import express from 'express';
+import { verifyToken } from '../middlewares/auth';
+import {
   getPortfolioItems,
   getPortfolioItem,
   createPortfolioItem,
   updatePortfolioItem,
   deletePortfolioItem
-} = require("../controllers/portfolioController");
+} from '../controllers/portfolioController';
+
 const router = express.Router();
 
 router.get("/", getPortfolioItems);
@@ -15,4 +16,4 @@ router.post("/", verifyToken, createPortfolioItem);
 router.put("/:id", verifyToken, updatePortfolioItem);
 router.delete("/:id", verifyToken, deletePortfolioItem);
 
-module.exports = router;
+export default router;
